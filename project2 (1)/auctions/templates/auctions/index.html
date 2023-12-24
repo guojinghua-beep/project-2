@@ -1,0 +1,17 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h4>Active Listings</h4>
+
+    {% for auction in object_list %}
+            {% if auction.active %}
+            <span class="card-title"><a href="{% url "auction_view" pk=auction.id %}">{{ auction.title }}</a></span>
+            <img class="materialboxed" src="{{ auction.image_url }}">
+            <p>{{ auction.description }}</p>
+            <span>Current price: ${{ auction.current_price }}</span>
+            <a href="{% url "auction_view" pk=auction.id %}">Bid</a>
+            {% endif %}
+    {% empty %}
+        empty, ops
+    {% endfor %}
+{% endblock %}
